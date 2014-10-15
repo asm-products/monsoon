@@ -8,6 +8,10 @@
 
 (defn- now [] (coerce/to-sql-date (new java.util.Date)))
 
+(defn- get-value-with-key
+  [with-key]
+  (fn [map-with-key] (get map-with-key with-key)))
+
 (defn create
   [source endpoint]
   (println source endpoint)
@@ -34,7 +38,8 @@
                       {:deleted_at (now)}
                       ["id = ?" id])))
 
-(defn get-all-expecting-source
+(defn get-all-endpoints-expecting-source
   [source]
-  (into [] (sql/query db/spec
-                      ["select endpoint from subscribers where source = ?" source])))
+  (map (unravel :endpoint)
+       (into [] (sql/query db/spec
+                 ["select endpoint from subscribers where source = ?" source]))))
