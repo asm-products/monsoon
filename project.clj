@@ -5,6 +5,7 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/java.jdbc "0.3.5"]
                  [cheshire "5.3.1"]
+                 [clj-http "1.0.0"]
                  [clj-time "0.8.0"]
                  [compojure "1.1.9" :exclusions [ring/ring-core]]
                  [environ "1.0.0"]

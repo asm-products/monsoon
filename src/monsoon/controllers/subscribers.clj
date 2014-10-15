@@ -20,16 +20,12 @@
 (defn- update
   [id endpoint]
   (let [updated-subscriber (subscriber/update id endpoint)]
-    (if (nil? updated-subscriber)
-      (ring/not-found id)
-      (retrieve id))))
+    (retrieve id)))
 
 (defn- destroy
   [id]
   (let [destroyed-subscriber (subscriber/destroy id)]
-    (if (empty? destroyed-subscriber)
-      (ring/not-found id)
-      (retrieve id))))
+    (retrieve id)))
 
 (defroutes subscriber-routes
   (context "/:source/:subscribers" [source]

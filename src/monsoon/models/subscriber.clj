@@ -28,7 +28,12 @@
 
 (defn destroy
   [id]
-  (into [] (sql/update! db/spec
-                        :subscribers
-                        {:deleted_at (now)}
-                        ["id = ?" id])))
+  (first (sql/update! db/spec
+                      :subscribers
+                      {:deleted_at (now)}
+                      ["id = ?" id])))
+
+(defn get-all-expecting-source
+  [source]
+  (into [] (sql/query db/spec
+                      ["select * from subscribers where source = ?" source])))
