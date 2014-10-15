@@ -10,6 +10,7 @@
 
 (defn create
   [source endpoint]
+  (println source endpoint)
   (first (sql/insert! db/spec
                       :subscribers
                       {:source source :endpoint endpoint})))
@@ -36,4 +37,4 @@
 (defn get-all-expecting-source
   [source]
   (into [] (sql/query db/spec
-                      ["select * from subscribers where source = ?" source])))
+                      ["select endpoint from subscribers where source = ?" source])))

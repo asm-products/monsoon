@@ -28,10 +28,10 @@
     (retrieve id)))
 
 (defroutes subscriber-routes
-  (context "/:source/:subscribers" [source]
+  (context "/:source/subscribers" [source]
            (POST "/"
-                 {endpoint :body}
-                 (create source (slurp endpoint)))
+                 {body :body}
+                 (create source (slurp body)))
            (context "/:id" [id]
                     (GET "/" [] (retrieve (java.util.UUID/fromString id)))
                     (PUT "/"

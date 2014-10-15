@@ -5,14 +5,14 @@
 
 (defn- push-to-subscriber
   [headers payload]
-  (fn [endpoint]
+  (fn [endpoint-map]
     (try
-      (http/post endpoint
+      (http/post (endpoint-map :endpoint)
                  {:body (generate-string {:headers headers
-                                        :payload payload})
+                                          :payload payload})
                   :content-type :json})
       (catch Exception e
-        (println (clojure.string/join ["Error on " endpoint ":\n" e]))))))
+        (println (clojure.string/join ["Error on " (endpoint-map :endpoint) ":\n" e]))))))
 
 (defn push
   [headers source payload]
