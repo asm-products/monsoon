@@ -1,6 +1,6 @@
 # monsoon
 
-A lightweight database wrapper and push mechanism for sundry activities &mdash; it kind of makes tidal waves, I guess.
+A lightweight database wrapper and push mechanism for sundry activities &mdash; it makes it rain or something.
 
 ## Prerequisites
 
