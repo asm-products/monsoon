@@ -11,4 +11,4 @@ deploy:
   api_key:
     secure: eF+lF+TZkrqOyaCWEDhS3vL7/uy09CX4q/ZrMirwyyrk+EGm19n65PvI/xGyKjYd3qW31jZScAIO4hwxJjChCDeChKKPIa5jMB91z0WUu7jNhqDxf7FHtpTj8S4ZwwJsvBNSK23/TzQuyaNABtJEEMBY3mINl+0ub2ZLJWDblUw=
 env:
-  DATABASE_URL: "jdbc:postgres://localhost/monsoon_test"
+  DATABASE_URL: "jdbc:postgres://127.0.0.1/monsoon_test"
