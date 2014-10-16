@@ -1,4 +1,6 @@
-# monsoon
+# Monsoon
+
+[![Build Status](https://travis-ci.org/asm-products/monsoon.svg)](https://travis-ci.org/asm-products/monsoon)
 
 A lightweight database wrapper and push mechanism for sundry activities &mdash; it makes it rain or something.
 
