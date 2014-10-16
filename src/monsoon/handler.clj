@@ -2,14 +2,14 @@
   (:require [compojure.core :refer :all]
             [compojure.handler :as handler]
             [compojure.route :as route]
-            [environ.core :refer [env]]
             [monsoon.controllers.activities :as activities]
-            [monsoon.controllers.subscribers :as subscribers]))
+            [monsoon.controllers.subscribers :as subscribers]
+            [monsoon.lib.authorization :as authorization]))
 
 (defroutes app-routes
-  activities/activity-routes
   subscribers/subscriber-routes
+  (-> activities/activity-routes authorization/authorize)
   (route/not-found "Not Found"))
 
 (def app
-  (handler/site app-routes))
+  (handler/api app-routes))

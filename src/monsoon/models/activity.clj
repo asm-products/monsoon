@@ -3,9 +3,10 @@
             [monsoon.db.config :as db]))
 
 (defn create
-  [headers source payload]
+  [headers product source payload]
   (first (sql/insert! db/spec
                :activities
                {:headers headers
+                :product product
                 :source source
                 :payload payload})))

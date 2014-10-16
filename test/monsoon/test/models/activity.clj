@@ -15,7 +15,10 @@
 
 (deftest create-activity
   (testing "Create activity"
-    (let [resp (activity/create "{\"test\":\"headers\"}" "test-source" "test-payload")]
+    (let [resp (activity/create "{\"test\":\"headers\"}"
+                                "test-product"
+                                "test-source"
+                                "test-payload")]
       (is (= (resp :payload) "test-payload"))
       (is (= (resp :source) "test-source"))
       (is (= (resp :headers) "{\"test\":\"headers\"}")))))

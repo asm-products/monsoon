@@ -8,23 +8,22 @@
                  [clj-http "1.0.0"]
                  [clj-time "0.8.0"]
                  [compojure "1.1.9" :exclusions [ring/ring-core]]
+                 [com.gfredericks/vcr-clj "0.4.0"]
                  [environ "1.0.0"]
                  [postgresql "9.3-1102.jdbc41"]
-                 [ragtime "0.3.7"]
                  [ring "1.3.1"]
                  [ring-mock "0.1.5"]]
-  :plugins [[lein-environ "1.0.0"]
-            [lein-ring "0.8.12"]
-            [ragtime/ragtime.lein "0.3.7"]]
-  :ragtime {:migrations ragtime.sql.files/migrations
-            :database (System/getenv :database-url)}
+  :plugins [[clj-sql-up "0.3.3"]
+            [lein-environ "1.0.0"]
+            [lein-ring "0.8.12"]]
+  :clj-sql-up {:database "jdbc:postgresql://127.0.0.1/monsoon_development"
+               :database-test "jdbc:postgresql://127.0.0.1/monsoon_test"
+               :deps [[postgresql "9.3-1102.jdbc41"]]}
   :ring {:handler monsoon.handler/app
          :auto-refresh? true
          :nrepl {:start? true}}
   :main ^:skip-aot monsoon.handler
   :profiles
-  {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]]
-         :ragtime {:database (env :database-url)}}
+  {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]]}
    :test {:dependencies [[javax.servlet/servlet-api "2.5"]
-                         [ring-mock "0.1.5"]]
-          :ragtime {:database (env :database-url)}}})
+                         [ring-mock "0.1.5"]]}})
