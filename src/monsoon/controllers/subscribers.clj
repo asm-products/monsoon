@@ -2,6 +2,7 @@
   (:use compojure.core)
   (:require [ring.util.response :as ring]
             [cheshire.core :refer :all]
+            [monsoon.lib.authorization :as authorization]
             [monsoon.models.subscriber :as subscriber]))
 
 (defn- create
@@ -31,7 +32,7 @@
   (let [destroyed-subscriber (subscriber/destroy id)]
     (retrieve id)))
 
-(defroutes subscriber-routes
+(defroutes -subscriber-routes
   (context "/:product/:source/subscribers" [product source]
            (POST "/"
                  {body :body}
@@ -42,3 +43,7 @@
                          {endpoint :body}
                          (update (java.util.UUID/fromString id) (slurp endpoint)))
                     (DELETE "/" [] (destroy (java.util.UUID/fromString id))))))
+
+(defroutes subscriber-routes
+  (-> -subscriber-routes
+      authorization/authorize))

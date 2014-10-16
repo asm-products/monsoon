@@ -46,6 +46,7 @@
 (defn authorize
   [app]
   (fn [request]
+    (println request)
     (if (authorized? request)
       (app request)
       (-> (response/render (generate-string {:status 401 :message "Unauthorized"})
