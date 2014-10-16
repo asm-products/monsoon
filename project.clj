@@ -2,6 +2,8 @@
   :description "Lightweight database wrapper and push mechanism for sundry activities"
   :url "https://assembly.com/monsoon"
   :min-lein-version "2.0.0"
+  :license {:name "Affero General Public License"
+            :url "https://gnu.org/licenses/agpl.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/java.jdbc "0.3.5"]
                  [cheshire "5.3.1"]
@@ -23,7 +25,9 @@
          :auto-refresh? true
          :nrepl {:start? true}}
   :main ^:skip-aot monsoon.handler
+  :uberjar-name "monsoon-standalone.jar"
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]]}
    :test {:dependencies [[javax.servlet/servlet-api "2.5"]
-                         [ring-mock "0.1.5"]]}})
+                         [ring-mock "0.1.5"]]}
+   :uberjar {:main monsoon.handler :aot :all}})
