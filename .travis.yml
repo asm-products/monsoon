@@ -6,7 +6,8 @@ addons:
   postgresql: '9.3'
 before_script:
 - psql -c 'create database monsoon_test;' -U postgres
-script: lein clj-sql-up run migrate
+- lein clj-sql-up run migrate
+script: lein test
 deploy:
   provider: heroku
   strategy: git
