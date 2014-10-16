@@ -1,13 +1,9 @@
 language: clojure
-lein: lein2
-jdk:
-- openjdk7
 addons:
   postgresql: '9.3'
 before_script:
 - psql -c 'create database monsoon_test;' -U postgres
 - lein clj-sql-up run migrate
-script: lein test
 deploy:
   provider: heroku
   strategy: git
