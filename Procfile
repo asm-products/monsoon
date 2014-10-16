@@ -1,1 +1,1 @@
-web: java $JVM_OPTS -jar target/monsoon-standalone.jar
+web: lein trampoline ring server
