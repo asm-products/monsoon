@@ -13,11 +13,12 @@
   (fn [map-with-key] (get map-with-key with-key)))
 
 (defn create
-  [source endpoint]
-  (println source endpoint)
+  [product source endpoint]
   (first (sql/insert! db/spec
                       :subscribers
-                      {:source source :endpoint endpoint})))
+                      {:product product
+                       :source source
+                       :endpoint endpoint})))
 
 (defn retrieve
   [id]
@@ -39,7 +40,9 @@
                       ["id = ?" id])))
 
 (defn get-all-endpoints-expecting-source
-  [source]
-  (map (unravel :endpoint)
+  [product source]
+  (map (get-value-with-key :endpoint)
        (into [] (sql/query db/spec
-                 ["select endpoint from subscribers where source = ?" source]))))
+                 ["select endpoint from subscribers where product = ? and source = ?"
+                  product
+                  source]))))

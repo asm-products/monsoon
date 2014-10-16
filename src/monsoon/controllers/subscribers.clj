@@ -5,9 +5,13 @@
             [monsoon.models.subscriber :as subscriber]))
 
 (defn- create
-  [source endpoint]
-  (let [created (subscriber/create source endpoint)]
-    (ring/created (clojure.string/join ["/" source "/subscribers"])
+  [product source endpoint]
+  (let [created (subscriber/create product source endpoint)]
+    (ring/created (clojure.string/join ["/"
+                                        product
+                                        "/"
+                                        source
+                                        "/subscribers"])
                   (created :id))))
 
 (defn- retrieve
@@ -28,10 +32,10 @@
     (retrieve id)))
 
 (defroutes subscriber-routes
-  (context "/:source/subscribers" [source]
+  (context "/:product/:source/subscribers" [product source]
            (POST "/"
                  {body :body}
-                 (create source (slurp body)))
+                 (create product source (slurp body)))
            (context "/:id" [id]
                     (GET "/" [] (retrieve (java.util.UUID/fromString id)))
                     (PUT "/"

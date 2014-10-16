@@ -7,7 +7,7 @@
   [headers payload]
   (fn [endpoint]
     (try
-      (http/post (endpoint)
+      (http/post endpoint
                  {:body (generate-string {:headers headers
                                           :payload payload})
                   :content-type :json})
