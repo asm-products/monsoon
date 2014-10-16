@@ -1,6 +1,9 @@
 (ns monsoon.lib.authorization
-  (require [clj-http.client :as http]
-           [environ.core :refer [env]]))
+  (require [cheshire.core :refer [generate-string]]
+           [clj-http.client :as http]
+           [compojure.response :as response]
+           [environ.core :refer [env]]
+           [ring.util.response :refer [header status]]))
 
 (defn- make-url
   [product token]
@@ -43,4 +46,9 @@
 (defn authorize
   [app]
   (fn [request]
-    (when (authorized? request) (app request))))
+    (if (authorized? request)
+      (app request)
+      (-> (response/render (generate-string {:status 401 :message "Unauthorized"})
+                           request)
+          (status 401)
+          (header "Content-Type" "application/json")))))

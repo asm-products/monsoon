@@ -1,4 +1,5 @@
 (ns monsoon.db.config
   (:require [environ.core :refer [env]]))
 
-(def spec (env :database-url))
+(def spec (or (env :database-url)
+              (System/getenv "DATABASE_URL")))

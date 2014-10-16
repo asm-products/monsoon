@@ -19,7 +19,7 @@
   (let [retrieved-subscriber (subscriber/retrieve id)]
     (if (empty? retrieved-subscriber)
       (ring/not-found id)
-      (ring/response retrieved-subscriber))))
+      (ring/response (generate-string retrieved-subscriber)))))
 
 (defn- update
   [id endpoint]

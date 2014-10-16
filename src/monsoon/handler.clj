@@ -9,8 +9,9 @@
 
 (defroutes app-routes
   subscribers/subscriber-routes
-  (-> activities/activity-routes authorization/authorize)
+  activities/activity-routes
   (route/not-found "Not Found"))
 
 (def app
-  (handler/api app-routes))
+  (handler/api (-> app-routes
+                   authorization/authorize)))
