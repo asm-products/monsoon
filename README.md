@@ -16,6 +16,16 @@ To start a web server for the application, run:
 
     lein ring server
 
+# Fig
+
+You can use Docker and Fig to run an isolated environment. First install `boot2docker` and `fig`.
+
+    fig up
+
+in a second terminal, bootstrap the database:
+
+    ./bootstrap.sh
+
 ## License
 
 AGPL
