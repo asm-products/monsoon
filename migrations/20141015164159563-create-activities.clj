@@ -2,7 +2,7 @@
 
 (defn up []
   ["CREATE TABLE activities (
-    id         uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     sent_at    timestamp,
     headers    text,

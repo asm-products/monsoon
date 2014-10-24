@@ -19,8 +19,8 @@
   :plugins [[clj-sql-up "0.3.3"]
             [lein-environ "1.0.0"]
             [lein-ring "0.8.12"]]
-  :clj-sql-up {:database "jdbc:postgresql://127.0.0.1/monsoon_development"
-               :database-test "jdbc:postgresql://127.0.0.1/monsoon_test"
+  :clj-sql-up {:database "jdbc:postgresql://postgres@db/monsoon_development"
+               :database-test "jdbc:postgresql://postgres@db/monsoon_test"
                :deps [[postgresql "9.3-1102.jdbc41"]]}
   :ring {:handler monsoon.handler/app
          :auto-refresh? true
